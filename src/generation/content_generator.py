@@ -32,11 +32,13 @@ class ContentGenerator:
                 "A SCRIPT THAT CAN BE READ AND CONTAINS ALL INFORMATION! I will also give you the first created sub "
                 "topic script so you can make sure to avoid duplication, if its empty you are currently writing the "
                 "first sub topic script. Make sure you search for historic sources so you can provide deep knowledge "
-                "and not just common info."
+                "and not just common info. You should give exact example for event and be precise and give background "
+                "information, that cant easily be googled."
             )
         self.human_template = ("your sub topic to focus on: {sub_topic} the main topic for context: {topic} the "
                                "amount of other sub topics: {subtopics_amount} the required full length of the "
-                               "presentation in minutes: {length_minutes} the script of the last subtopic: {first_script}")
+                               "presentation in minutes: {length_minutes} this is the script of the last subtopic, "
+                               "use it to avoid duplication: {first_script}")
 
         self.subtopics_text = None
 
