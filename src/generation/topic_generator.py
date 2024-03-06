@@ -52,13 +52,13 @@ class TopicGenerator:
             ("human", self.human_template)
         ])
 
-    def generate(self):
+    def generate(self, topic: str, subtopics_amount: int, length_minutes: int):
         chat_model = self.load_chat_model()
 
         chat_prompt = self.create_chat_prompt()
 
-        formatted_prompt = chat_prompt.format_messages(topic="Die DDR, Der Warschauer Pakt im Kontext von Nationen",
-                                                       subtopics_amount=10, length_minutes="15")
+        formatted_prompt = chat_prompt.format_messages(topic=topic, subtopics_amount=subtopics_amount,
+                                                       length_minutes=length_minutes)
         result = chat_model.invoke(formatted_prompt)
 
         output_array = self.format_subtopics(subtopics_string=result.content)

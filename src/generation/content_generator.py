@@ -20,8 +20,10 @@ class ContentGenerator:
                 "to the other topics. Your main focus should be on the sub topics but will also get the main topic as "
                 "context, the amount of other sub topics and the required length in minutes of the whole presentation "
                 "so you can fulfill your task as best as you can. Make sure you gather enough content to fill the "
-                "presentation with quality information. In the end you should just return the generated text and if "
-                "its long split it into paragraphs with sub headings."
+                "presentation with quality information. In the end you should just return the generated text and "
+                "return a continuous text with the sub topic as a heading at the top. Make sure the text is content "
+                "rich and not just scratching the surface of the given sub topic. I will later transform this text "
+                "into bullet points, so you must make sure it has a lot of value."
             )
         self.human_template = ("your sub topic to focus on: {sub_topic} the main topic for context: {topic} the "
                                "amount of other sub topics: {subtopics_amount} the required full length of the "
@@ -40,12 +42,17 @@ class ContentGenerator:
             ("human", self.human_template)
         ])
 
-    def generate(self):
+    def clear_output_text(self):
+        self.subtopics_text = None
+
+    def generate(self, sub_topic: str, topic: str, subtopics_amount: int, length_minutes: int):
         chat_model = self.load_chat_model()
 
         chat_prompt = self.create_chat_prompt()
 
-        formatted_prompt = chat_prompt.format_messages(sub_topic="", topic="", subtopics_amount=8, length_minutes=10)
+        formatted_prompt = chat_prompt.format_messages(sub_topic=sub_topic, topic=topic,
+                                                       subtopics_amount=subtopics_amount - 1,
+                                                       length_minutes=length_minutes)
         result = chat_model.invoke(formatted_prompt)
 
         self.subtopics_text = result.content
