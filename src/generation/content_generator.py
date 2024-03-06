@@ -29,11 +29,14 @@ class ContentGenerator:
                 "bold text. Its a must to just write the script about the given sub topic and dont include other "
                 "information as they are given in other sub topic scripts. DONT GIVE A GENERAL INTRO TO THE TOPIC "
                 "AGAIN JUST WRITE ABOUT THE GIVEN SUB TOPIC OR THIS WILL FAIL. THANK YOU! DONT DO BULLET POINTS, WRITE "
-                "A SCRIPT THAT CAN BE READ AND CONTAINS ALL INFORMATION!"
+                "A SCRIPT THAT CAN BE READ AND CONTAINS ALL INFORMATION! I will also give you the first created sub "
+                "topic script so you can make sure to avoid duplication, if its empty you are currently writing the "
+                "first sub topic script. Make sure you search for historic sources so you can provide deep knowledge "
+                "and not just common info."
             )
         self.human_template = ("your sub topic to focus on: {sub_topic} the main topic for context: {topic} the "
                                "amount of other sub topics: {subtopics_amount} the required full length of the "
-                               "presentation in minutes {length_minutes}")
+                               "presentation in minutes: {length_minutes} the script of the last subtopic: {first_script}")
 
         self.subtopics_text = None
 
@@ -51,14 +54,14 @@ class ContentGenerator:
     def clear_output_text(self):
         self.subtopics_text = None
 
-    def generate(self, sub_topic: str, topic: str, subtopics_amount: int, length_minutes: int):
+    def generate(self, sub_topic: str, topic: str, subtopics_amount: int, length_minutes: int, first_script: str):
         chat_model = self.load_chat_model()
 
         chat_prompt = self.create_chat_prompt()
 
         formatted_prompt = chat_prompt.format_messages(sub_topic=sub_topic, topic=topic,
                                                        subtopics_amount=subtopics_amount - 1,
-                                                       length_minutes=length_minutes)
+                                                       length_minutes=length_minutes, first_script=first_script)
         result = chat_model.invoke(formatted_prompt)
 
         self.subtopics_text = result.content
