@@ -29,7 +29,8 @@ class TopicGenerator:
                 "short and"
                 "easy for another agent to research and generate content for. Make sure the sub topics allow a high "
                 "level"
-                "presentation."
+                "presentation. Use the language given in the input topic. Make sure the sub topic are not too "
+                "similar to avoid duplication in the later content creation process."
             )
         self.human_template = ("the topic: {topic} subtopic amount: {subtopics_amount} the time length: {"
                                "length_minutes} in minutes")

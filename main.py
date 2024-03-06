@@ -5,9 +5,9 @@ from src.generation.topic_generator import TopicGenerator
 
 load_dotenv()
 
-input_topic = "DDR, Der Warschauer Pakt im Kontext von Nationen"
-input_subtopics_amount = 3
-input_length_minutes = 5
+input_topic = "Rolle der DDR im Warschauer Pakt und im Rat für gegenseitige Wirtschaftshilfe(Comecon)"
+input_subtopics_amount = 10
+input_length_minutes = 15
 
 topic_generator = TopicGenerator()
 
@@ -25,6 +25,7 @@ with open('./output/output.txt', 'a', encoding="utf-8") as file:
         print(content_generator.subtopics_text)
 
         file.write(content_generator.subtopics_text)
+        file.write("\n-------------------------------------------------\n")
         content_generator.clear_output_text()
 
         print("-------------------------------------------------------------------------- \n ")
