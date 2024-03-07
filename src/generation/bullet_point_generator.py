@@ -6,11 +6,14 @@ from langchain.prompts.chat import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 
+from src.generation.base_generator import BaseGenerator
+
 load_dotenv()
 
 
-class BulletPointGenerator:
+class BulletPointGenerator(BaseGenerator):
     def __init__(self):
+        super().__init__()
         self.llm_template = \
             (
                 "You are now a presentation creator agent. You will just respond in the given scheme. You task is to "
@@ -24,17 +27,6 @@ class BulletPointGenerator:
         self.human_template = "the script: {script} the sub topic: {subtopic}"
 
         self.bullet_points_text = None
-
-    @staticmethod
-    def load_chat_model():
-        return ChatOpenAI(openai_api_key=os.getenv("OPENAI_API_KEY"),
-                          model_name="gpt-3.5-turbo")
-
-    def create_chat_prompt(self):
-        return ChatPromptTemplate.from_messages([
-            ("system", self.llm_template),
-            ("human", self.human_template)
-        ])
 
     def clear_output_text(self):
         self.bullet_points_text = None

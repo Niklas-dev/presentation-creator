@@ -6,13 +6,15 @@ from langchain.prompts.chat import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 
+from .base_generator import BaseGenerator
 from ..formatters.output_formatting import format_subtopics_llm_output
 
 load_dotenv()
 
 
-class TopicGenerator:
+class TopicGenerator(BaseGenerator):
     def __init__(self):
+        super().__init__()
         self.subtopics_string = None
         self.llm_template = \
             (
@@ -30,7 +32,8 @@ class TopicGenerator:
                 "easy for another agent to research and generate content for. Make sure the sub topics allow a high "
                 "level"
                 "presentation. Use the language given in the input topic. Make sure the sub topic are not too "
-                "similar to avoid duplication in the later content creation process."
+                "similar to avoid duplication in the later content creation process. Be creative and avoid to similar "
+                "sub topics. Be open for deep sub topics that have a lot of potential for an interesting presentation"
             )
         self.human_template = ("the topic: {topic} subtopic amount: {subtopics_amount} the time length: {"
                                "length_minutes} in minutes")
@@ -38,20 +41,9 @@ class TopicGenerator:
         self.subtopics_array = None
 
     @staticmethod
-    def load_chat_model():
-        return ChatOpenAI(openai_api_key=os.getenv("OPENAI_API_KEY"),
-                          model_name="gpt-3.5-turbo")
-
-    @staticmethod
     def format_subtopics(subtopics_string) -> List[str]:
         print("Formatting topics")
         return format_subtopics_llm_output(subtopics_string=subtopics_string)
-
-    def create_chat_prompt(self):
-        return ChatPromptTemplate.from_messages([
-            ("system", self.llm_template),
-            ("human", self.human_template)
-        ])
 
     def generate(self, topic: str, subtopics_amount: int, length_minutes: int):
         chat_model = self.load_chat_model()

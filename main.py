@@ -9,9 +9,9 @@ from pptx import Presentation
 load_dotenv()
 prs = Presentation()
 
-input_topic = "Rolle der DDR im Warschauer Pakt und im Rat für gegenseitige Wirtschaftshilfe(Comecon)"
-input_subtopics_amount = 2
-input_length_minutes = 15
+input_topic = "Die DDR im Warschauer Pakt und im Rat für gegenseitige Wirtschaftshilfe"
+input_subtopics_amount = 10
+input_length_minutes = 20
 
 topic_generator = TopicGenerator()
 
@@ -30,11 +30,10 @@ with open('./output/output.txt', 'a', encoding="utf-8") as file:
 
         bullet_point_generator.generate(script=content_generator.subtopics_text, sub_topic=subtopic)
 
-
         if script_save is None:
             script_save = content_generator.subtopics_text
 
-        file.write(bullet_point_generator.bullet_points_text)
+        file.write(content_generator.subtopics_text)
         file.write("\n-------------------------------------------------\n")
 
         slide_layout = prs.slide_layouts[1]  # Title and content layout
@@ -43,6 +42,9 @@ with open('./output/output.txt', 'a', encoding="utf-8") as file:
         # Set title
         title = slide.shapes.title
         title.text = subtopic
+
+        title_text_frame = title.text_frame
+        title_text_frame.paragraphs[0].font.size = Pt(16)
 
         # Add bullet points
         content_placeholder = slide.placeholders[1]  # Index 1 is the content placeholder
@@ -59,18 +61,9 @@ with open('./output/output.txt', 'a', encoding="utf-8") as file:
             print(point.removesuffix('\n'))
 
         for paragraph in range(len(content_text_frame.paragraphs)):
-            content_text_frame.paragraphs[paragraph].font.size = Pt(5)
+            content_text_frame.paragraphs[paragraph].font.size = Pt(10)
 
         prs.save("./output/multiple_slides.pptx")
-
-
-
-
-
-
-
-
-
 
         content_generator.clear_output_text()
 
