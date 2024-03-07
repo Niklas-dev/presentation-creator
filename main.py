@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from pptx.util import Pt
 
 from src.generation.bullet_point_generator import BulletPointGenerator
 from src.generation.content_generator import ContentGenerator
@@ -45,12 +46,20 @@ with open('./output/output.txt', 'a', encoding="utf-8") as file:
 
         # Add bullet points
         content_placeholder = slide.placeholders[1]  # Index 1 is the content placeholder
-        content_placeholder.text = "Bullet Points:"
+
         content_text_frame = content_placeholder.text_frame
-        for point in bullet_point_generator.bullet_points_text.split("- "):
+
+        filtered_bullet_points = list(filter(None, bullet_point_generator.bullet_points_text.split("- ")))
+
+        for point in filtered_bullet_points:
             p = content_text_frame.add_paragraph()
-            p.text = point
-            print(point)
+
+            p.text = point.removesuffix('\n')
+
+            print(point.removesuffix('\n'))
+
+        for paragraph in range(len(content_text_frame.paragraphs)):
+            content_text_frame.paragraphs[paragraph].font.size = Pt(5)
 
         prs.save("./output/multiple_slides.pptx")
 

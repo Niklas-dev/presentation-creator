@@ -13,18 +13,13 @@ class BulletPointGenerator:
     def __init__(self):
         self.llm_template = \
             (
-                "You are now a presentation creator agent. You will just respond in the given scheme. You must follow "
-                "this"
-                "everytime. You are given a script that will be read at a presentation and you must transform this "
-                "into short but informative bullet points. Make sure to answer with just the bullet points. You are "
-                "also given the sub topic of the script so you are aware of the context. Make sure the bullet points "
-                "include as much info as possible but leave something that can be said. The bullet point dont have to "
-                "be full sentences all the time. the output scheme should be and must be followed: long bullet point "
-                "one/another long"
-                "bullet point/a cool bullet point three. Make sure you use the slash as separation so I can later "
-                "format the bullet points how I want to. So I repeat: point one/point two/point three/ and so on. "
-                "THIS IS VERY IMPORTANT. The bullet points shouldn't be too long, this means a maximum of 10 words "
-                "per point."
+                "You are now a presentation creator agent. You will just respond in the given scheme. You task is to "
+                "transform the text you are given into bullet points Make sure the bullet points are "
+                "not longer than 10 words but are still informative and precise. You must always follow the / "
+                "separation format as I can just continue with the formatting if the output has the correct format. "
+                "Also maintain the language in the bullet points that was used in the given text. Thank You."
+
+
             )
         self.human_template = "the script: {script} the sub topic: {subtopic}"
 
