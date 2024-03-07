@@ -21,7 +21,10 @@ class BulletPointGenerator:
                 "include as much info as possible but leave something that can be said. The bullet point dont have to "
                 "be full sentences all the time. the output scheme should be and must be followed: long bullet point "
                 "one/another long"
-                "bullet point/a cool bullet point three. Make sure you use the slash as separation so I can later format the bullet points how I want to. So I repeat: point one/point two/point three/ and so on. THIS IS VERY IMPORTANT"
+                "bullet point/a cool bullet point three. Make sure you use the slash as separation so I can later "
+                "format the bullet points how I want to. So I repeat: point one/point two/point three/ and so on. "
+                "THIS IS VERY IMPORTANT. The bullet points shouldn't be too long, this means a maximum of 10 words "
+                "per point."
             )
         self.human_template = "the script: {script} the sub topic: {subtopic}"
 
