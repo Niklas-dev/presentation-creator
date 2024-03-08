@@ -11,7 +11,7 @@ load_dotenv()
 prs = Presentation()
 
 input_topic = "Die DDR im Warschauer Pakt und im Rat für gegenseitige Wirtschaftshilfe"
-input_subtopics_amount = 10
+input_subtopics_amount = 12
 input_length_minutes = 20
 
 topic_generator = TopicGenerator()
@@ -35,14 +35,18 @@ with open('./output/output.txt', 'a', encoding="utf-8") as file:
         if script_save is None:
             script_save = content_generator.subtopics_text
 
+        file.write(f"{subtopic}: \n")
         file.write(content_generator.subtopics_text)
-        file.write("\n-------------------------------------------------\n")
+        file.write("\n -------------------------------------------------- \n Next slide \n "
+                   "--------------------------------------------------")
+        print(bullet_point_generator.bullet_points_text)
 
         slide = powerpoint_generator.add_slide()
 
         powerpoint_generator.add_title(topic_title=subtopic, slide=slide)
 
-        powerpoint_generator.add_bullet_points(points_array=list(filter(None, bullet_point_generator.bullet_points_text.split("- "))), slide=slide)
+        powerpoint_generator.add_bullet_points(points_array=list(filter(None, bullet_point_generator.bullet_points_text.
+                                                                        split("- "))), slide=slide)  # test new gen clas
 
         powerpoint_generator.save_pptx("./output/multiple_slides.pptx")
 
