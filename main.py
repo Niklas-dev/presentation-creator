@@ -1,5 +1,4 @@
 from dotenv import load_dotenv
-from pptx.util import Pt
 
 from src.generation.bullet_point_generator import BulletPointGenerator
 from src.generation.content_generator import ContentGenerator
