@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 ## Configuration
 
-Before you can run the project you must get get a OpenAI API key, which is free (limited usage). Add the API Key to the env as described below.
+Before you can run the project you must get get a OpenAI API key, which is free (limited usage). Add the API Key to the env as described below. You must also create an output foler in the root dir, after execution your pptx file and script will be in there.
 
 ```bash
 # Create a .env file
@@ -50,6 +50,20 @@ After installing the dependencies you can run the main script with the additiona
 py .\main.py --topic Water --subtopics_amount 5 --length_minutes 10
 ```
 
+## Examples
+
+Here you can see an example output for the topic Python Programming Language, two sub topics and 5 min length.
+
+Slide One
+![img.png](examples/img.png)
+
+Slide Two
+![img_1.png](examples/img_1.png)
+
+```bash
+# Example usage
+py .\main.py --topic Water --subtopics_amount 5 --length_minutes 10
+```
 
 
 ## Contributing
