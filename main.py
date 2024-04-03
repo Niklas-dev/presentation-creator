@@ -12,9 +12,9 @@ load_dotenv()
 argument_parser = ArgumentParser()
 print(argument_parser.get_args())
 
-input_topic = "Die DDR im Warschauer Pakt und im Rat für gegenseitige Wirtschaftshilfe"
-input_subtopics_amount = 12
-input_length_minutes = 20
+input_topic = str(argument_parser.get_args().topic)
+input_subtopics_amount = int(argument_parser.get_args().subtopics_amount)
+input_length_minutes = int(argument_parser.get_args().length_minutes)
 
 topic_generator = TopicGenerator()
 
