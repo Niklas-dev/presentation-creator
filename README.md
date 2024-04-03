@@ -8,8 +8,9 @@ Easily create a PowerPoint without putting in the work.
 2. [Installation](#installation)
 3. [Configuration](#configuration)
 4. [Usage](#usage)
-5. [Contributing](#contributing)
-6. [License](#license)
+5. [Example](#examples)
+6. [Contributing](#contributing)
+7. [License](#license)
 
 ## Introduction
 
@@ -62,7 +63,7 @@ Slide Two
 
 ```bash
 # Example usage
-py .\main.py --topic Water --subtopics_amount 5 --length_minutes 10
+py .\main.py --topic "Python Programming Language" --subtopics_amount 2 --length_minutes 5
 ```
 
 
