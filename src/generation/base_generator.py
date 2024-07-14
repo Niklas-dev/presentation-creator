@@ -1,7 +1,9 @@
 import os
 
+from langchain_groq import ChatGroq
 from langchain_openai import ChatOpenAI
 from langchain.prompts.chat import ChatPromptTemplate
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 
 class BaseGenerator:
@@ -11,12 +13,14 @@ class BaseGenerator:
 
     @staticmethod
     def load_chat_model():
-        return ChatOpenAI(openai_api_key=os.getenv("OPENAI_API_KEY"),
-                          model_name="gpt-3.5-turbo")
+        llm = ChatGroq(
+            temperature=0,
+            model="mixtral-8x7b-32768",
+        )
 
+        return llm
     def create_chat_prompt(self):
         return ChatPromptTemplate.from_messages([
             ("system", self.llm_template),
             ("human", self.human_template)
         ])
-
