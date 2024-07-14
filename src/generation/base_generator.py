@@ -15,10 +15,12 @@ class BaseGenerator:
     def load_chat_model():
         llm = ChatGroq(
             temperature=0,
-            model="mixtral-8x7b-32768",
+            model="llama3-70b-8192",
         )
 
         return llm
+
+
     def create_chat_prompt(self):
         return ChatPromptTemplate.from_messages([
             ("system", self.llm_template),
